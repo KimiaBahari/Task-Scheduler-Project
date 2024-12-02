@@ -1,0 +1,40 @@
+import unittest
+from unittest.mock import patch
+from io import StringIO
+from project import TaskScheduler
+
+class TestTaskScheduler(unittest.TestCase):
+
+    @patch('builtins.input', side_effect=["Test Task", "12:00"])
+    def test_add_task(self, mock_input):
+        scheduler = TaskScheduler()
+        scheduler.add_task("Test Task", "12:00")
+        self.assertEqual(len(scheduler.tasks), 1)
+        self.assertEqual(scheduler.tasks["Test Task"], "12:00")
+
+    def test_remove_task(self):
+        scheduler = TaskScheduler()
+        scheduler.add_task("Test Task", "12:00")
+        scheduler.remove_task("Test Task")
+        self.assertEqual(len(scheduler.tasks), 0)
+
+    def test_remove_nonexistent_task(self):
+        scheduler = TaskScheduler()
+        with patch('sys.stdout', new_callable=StringIO) as mock_output:
+            scheduler.remove_task("Nonexistent Task")
+            output = mock_output.getvalue().strip()
+        self.assertEqual(output, "Task 'Nonexistent Task' not found.")
+
+    def test_list_tasks(self):
+        scheduler = TaskScheduler()
+        scheduler.add_task("Task 1", "12:00")
+        scheduler.add_task("Task 2", "13:00")
+        with patch('sys.stdout', new_callable=StringIO) as mock_output:
+            scheduler.list_tasks()
+            output = mock_output.getvalue().strip()
+        expected_output = "Scheduled Tasks:\nTask 1 - 12:00\nTask 2 - 13:00"
+        self.assertEqual(output, expected_output)
+
+if __name__ == '__main__':
+    unittest.main()
+

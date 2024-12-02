@@ -1,0 +1,2 @@
+Libraries and pips that you need to add:
+pip install schedule plyer
