@@ -1,5 +1,4 @@
     # TaskScheduler
-    #### Video Demo:  <URL HERE>
     #### Description:
     Building an Advanced Task Scheduler with Notification Reminders
 In today's fast-paced world, effective task management is crucial. We live in an era where individuals juggle multiple responsibilities and commitments. To address this challenge, we've developed a sophisticated Python-based task scheduler that empowers users to add, remove, and list tasks with names and specific times. Moreover, it boasts a background scheduler that monitors scheduled tasks and sends timely notification reminders. In this comprehensive guide, we will explore the various facets of this application and discuss opportunities for further enhancement.
